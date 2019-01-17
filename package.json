@@ -1,0 +1,24 @@
+{
+  "name": "hero-site",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "informed": "^1.10.12",
+    "next": "^7.0.2",
+    "react": "^16.7.0",
+    "react-dependent-script": "^1.1.0",
+    "react-dom": "^16.7.0",
+    "react-form": "^3.5.6",
+    "react-ga": "^2.5.6",
+    "reactjs-popup": "^1.3.2"
+  }
+}
