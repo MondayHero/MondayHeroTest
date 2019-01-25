@@ -8,7 +8,7 @@ const Footer = (props) => (
         </ul>
         <ul className="copyright">
             <li>&copy;
-        {props.name}. All rights reserved.</li>
+        {props.name ? props.name: 'MondayHero'}. All rights reserved.</li>
         </ul>
     </footer>
 )

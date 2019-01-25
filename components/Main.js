@@ -1,13 +1,10 @@
 
 
 const Main = (props) => (
-    <section id="main" className="container" >
-
+    <div>
         <section className="box special">
             <header className="major">
-                <h2>Import Sketch designs
-            <br />
-                    choose platform and preferences
+                <h2>Import Sketch designs and
             <br />
                     get your native mobile UI codes with one click!
           </h2>
@@ -90,9 +87,9 @@ const Main = (props) => (
             </div>
             <div className="col-3 col-12-narrower">
                 <section className="box special">
-                    <span className="image featured"><img src="/static/images/secretHero.png" alt="" /></span>
-                    <h3>Secret Hero</h3>
-                    <p> Joker </p>
+                    <span className="image featured"><img src="/static/images/gizem.jpg" alt="" /></span>
+                    <h3>Gizem Sarı</h3>
+                    <p> Test Engineer </p>
                     <ul className="actions special">
                         <li><a target="_blank" href="https://www.linkedin.com/company/mondayhero" className="button alt">View Profile</a></li>
                     </ul>
@@ -110,7 +107,7 @@ const Main = (props) => (
             </div>
         </div>
 
-    </section >
+    </div>
 )
 export default Main
 
