@@ -9,11 +9,13 @@ import classNames from 'classnames';
 
 import { initGA, logPageView } from './utils/analytics'
 
-export default class Layout extends React.Component {
+class Layout extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            windowHeight: undefined,
+            windowWidth: undefined,
             isPreloads: true,
             isSinglePage: props.isSinglePage ? true : false,
             isBanner: props.isBanner ? true : false,
@@ -22,16 +24,27 @@ export default class Layout extends React.Component {
         }
     }
 
+    handleResize = () => this.setState({
+        windowHeight: window.innerHeight,
+        windowWidth: window.innerWidth
+    });
+
     componentDidMount() {
         if (!window.GA_INITIALIZED) {
             initGA()
             window.GA_INITIALIZED = true
         }
         logPageView()
+        this.handleResize();
+        window.addEventListener('resize', this.handleResize)
         this.setState({
             isPreloads: false
 
         })
+    }
+    
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.handleResize)
     }
 
     render() {
@@ -46,7 +59,10 @@ export default class Layout extends React.Component {
         var isAlt = !this.state.isSinglePage
         var isReveal = this.state.isSinglePage
 
-        
+        if (this.state.windowWidth < 745) {
+            mainStyle.marginTop = '-4em';
+        }
+
         return (
             <div className={landing}>
                 <div id="page-wrapper">
@@ -63,3 +79,4 @@ export default class Layout extends React.Component {
         )
     }
 }
+export default Layout

@@ -4,11 +4,8 @@ const Main = (props) => (
     <div>
         <section className="box special">
             <header className="major">
-                <h2>Import Sketch designs and
-            <br />
-                    get your native mobile UI codes with one click!
-          </h2>
-
+                <h2>Import Sketch designs and <br /> get your native mobile UI codes with one click!
+                </h2>
                 <p> You can modify your app data designs, code preferences, <br />platform and language settings at anytime.</p>
 
             </header>
