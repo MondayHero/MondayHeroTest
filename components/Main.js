@@ -85,7 +85,7 @@ const Main = (props) => (
             <div className="col-3 col-12-narrower">
                 <section className="box special">
                     <span className="image featured"><img src="/static/images/gizem.jpg" alt="" /></span>
-                    <h3>Gizem Sarı</h3>
+                    <h3>Gizem Sarıkaya</h3>
                     <p> Test Engineer </p>
                     <ul className="actions special">
                         <li><a target="_blank" href="https://www.linkedin.com/company/mondayhero" className="button alt">View Profile</a></li>

@@ -1466,7 +1466,7 @@ var Main = function Main(props) {
       lineNumber: 88
     },
     __self: this
-  }, "Gizem Sar\u0131"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+  }, "Gizem Sar\u0131kaya"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 89
