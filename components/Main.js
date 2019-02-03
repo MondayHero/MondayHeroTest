@@ -88,7 +88,7 @@ const Main = (props) => (
                     <h3>Gizem Sarıkaya</h3>
                     <p> Test Engineer </p>
                     <ul className="actions special">
-                        <li><a target="_blank" href="https://www.linkedin.com/company/mondayhero" className="button alt">View Profile</a></li>
+                        <li><a target="_blank" href="https://www.linkedin.com/in/gizemsarikaya" className="button alt">View Profile</a></li>
                     </ul>
                 </section>
             </div>
