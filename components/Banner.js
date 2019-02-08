@@ -38,7 +38,7 @@ class Banner extends Component {
                     email: '',
                     isModalOpen: true
                 })
-                
+
             })
 
         }

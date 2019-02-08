@@ -5,6 +5,8 @@ const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
 
+global.fetch = require("node-fetch");
+
 app.prepare()
     .then(() => {
         const server = express()
@@ -15,7 +17,7 @@ app.prepare()
 
         server.listen(3001, (err) => {
             if (err) throw err
-            console.log('> Ready on http://localhost:3000')
+            console.log('> Ready on http://localhost:3001')
         })
     })
     .catch((ex) => {

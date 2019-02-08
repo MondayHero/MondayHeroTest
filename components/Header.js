@@ -52,6 +52,7 @@ const Header = (props) => {
                 <script src="static/assets/js/breakpoints.min.js"></script>
                 <script src="static/assets/js/util.js"></script>
                 <script src="static/assets/js/main.js"></script>
+                <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/5451485.js"></script>
 
             </Head>
             <header id="header" className={headerClass}>

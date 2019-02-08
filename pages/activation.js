@@ -1,16 +1,29 @@
 import Layout from '../components/MHLayout'
-import { withRouter } from 'next/router'
+// import { withRouter } from 'next/router'
+import config from '../config.json'
+import { throws } from 'assert';
+
+const ErrorApi = function (params) {
+    return {
+        error: params
+    }
+}
 
 class RegisterForm extends React.Component {
     constructor(props) {
         super(props);
+
         this.state = {
-            username: '',
+            username: props.data,
             experienceOptionsState: '',
             roleOptionsState: '',
-            privacyCheckbox: true
+            privacyCheckbox: true,
+            password: '',
+            passwordAgain: ''
         }
         this.usernameOnChange = this.usernameOnChange.bind(this);
+        this.passwordOnChange = this.passwordOnChange.bind(this);
+        this.passwordAgainOnChange = this.passwordAgainOnChange.bind(this);
         this.experienceOptionOnChange = this.experienceOptionOnChange.bind(this);
         this.roleOptionOnChange = this.roleOptionOnChange.bind(this);
         this.privacyInputChange = this.privacyInputChange.bind(this);
@@ -19,7 +32,15 @@ class RegisterForm extends React.Component {
     }
 
     usernameOnChange(event) {
-        this.setState({ username: event.target.value });
+        // this.setState({ username: event.target.value });
+    }
+
+    passwordOnChange(event) {
+        this.setState({ password: event.target.value });
+    }
+
+    passwordAgainOnChange(event) {
+        this.setState({ passwordAgain: event.target.value });
     }
 
     experienceOptionOnChange(event) {
@@ -37,6 +58,37 @@ class RegisterForm extends React.Component {
     handleSubmit(event) {
         alert('Your favorite flavor is: ' + this.state.username + 'Exp: ' + this.state.experienceOptionsState + 'Role: ' + this.state.roleOptionsState);
         event.preventDefault();
+        var userName = this.state.username.split('@')[0];
+        this.userRegister(this.state.username, userName, this.state.password, this.state.roleOptionsState, this.state.experienceOptionsState)
+            .then(() => {
+                console.log('done');
+            })
+            .catch((err) => {
+                console.log('err', err.error.message);
+            })
+    }
+
+    async userRegister(emailParam, usernameParam, passParam, role, experience) {
+        const res = await fetch(`${config.apiUrl}/user/register`, {
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                'xheroUserName': usernameParam,
+                'xheroname': emailParam,
+                'xheropass': passParam,
+                'experience': experience,
+                'role': role
+            })
+        });
+
+        if (res.ok) {
+            const json = await res.json();
+            return json;
+        } else {
+            const json = await res.json();
+            throw new ErrorApi(json.errorModel)
+        }
+
     }
 
     render() {
@@ -74,10 +126,10 @@ class RegisterForm extends React.Component {
                             </select>
                         </div>
                         <div className="col-12">
-                            <input type="password" placeholder="Password" />
+                            <input onChange={this.passwordOnChange} value={this.state.password} type="password" placeholder="Password" />
                         </div>
                         <div className="col-12">
-                            <input type="password" placeholder="Password Again" />
+                            <input type="password" value={this.state.passwordAgain} onChange={this.passwordAgainOnChange} placeholder="Password Again" />
                         </div>
                         <div className="col-12">
                             <input key='privacyCeck' type="checkbox" checked={this.state.privacyCheckbox} onChange={this.privacyInputChange} />
@@ -113,6 +165,35 @@ class ErrorExpire extends React.Component {
 }
 
 class Activation extends React.Component {
+
+    constructor(props) {
+        super(props);
+        console.log(props.url.query.token);
+        
+        this.state = {
+            isExpire: true,
+            userMail: ''
+        }
+        this.fetchUser(props.url.query.token || '').then(response => {
+            this.setState({
+                isExpire: response.user.isRegister,
+                userMail: response.user.email
+            })
+        }).catch((err) => {
+            console.log(err);
+            this.setState({
+                isExpire: true,
+                userMail: ''
+            })
+        })
+    }
+
+    async fetchUser(token) {
+        const res = await fetch(`${config.apiUrl}/beta/getUser?token=${token}`);
+        const json = await res.json();
+        return json;
+    }
+
     render() {
         return (
             <Layout isSinglePage >
@@ -123,7 +204,7 @@ class Activation extends React.Component {
                 <div className="row">
                     <div className="col-12">
                         <section className="box">
-                            {this.props.router.query.hello == 'erol' ? <RegisterForm /> : <ErrorExpire />}
+                            {(!this.state.isExpire) ? <RegisterForm data={this.state.userMail} /> : <ErrorExpire />}
                         </section>
                     </div>
                 </div>
@@ -132,4 +213,4 @@ class Activation extends React.Component {
     }
 }
 
-export default withRouter(Activation);
+export default Activation;
